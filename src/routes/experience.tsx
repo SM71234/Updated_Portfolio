@@ -29,7 +29,7 @@ const items = [
     role: "B.E./B.Tech in Computer Science and Engineering",
     org: "Sanjay Ghodawat University",
     time: "Sept 2022 — June 2026",
-    body: "Completed Bachelor's degree in Computer Science and Engineering (CGPA 8.03 - Semester 6). Focused on data structures, systems engineering, database management, and full-stack web application development.",
+    body: "Completed Bachelor's degree in Computer Science and Engineering (8.23 CGPA). Focused on data structures, systems engineering, database management, and full-stack web application development.",
     tags: ["CSE", "Algorithms", "Database Systems", "Software Design"],
   },
 ];

@@ -13,7 +13,7 @@ export const Route = createFileRoute("/about")({
 
 const sections = [
   { icon: User, title: "Introduction", body: "I'm a developer who believes engineering is a craft. I build products that are fast, thoughtful, and delightful — from pixel to protocol." },
-  { icon: GraduationCap, title: "Education", body: "B.E./B.Tech in Computer Science and Engineering (Sept 2022 – June 2026) — deep focus on software design, systems programming, and full-stack web applications." },
+  { icon: GraduationCap, title: "Education", body: "B.E./B.Tech in Computer Science and Engineering (Sept 2022 – June 2026, 8.23 CGPA) — deep focus on software design, systems programming, and full-stack web applications." },
   { icon: Briefcase, title: "Career Journey", body: "From software engineering internships to managing production workflows as a Technical Operations Executive, I've owned features end-to-end." },
   { icon: Target, title: "Goals", body: "To build systems at scale, create robust developer tools, contribute to open source, and engineer applications that ship with taste." },
   { icon: Heart, title: "Interests", body: "Trading systems, developer tooling, AI models, automation, cricket, and long-form writing about software." },
