@@ -3,105 +3,39 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { PageShell } from "@/components/site/PageShell";
 import { ArrowLeft, ArrowRight, ExternalLink, Github } from "lucide-react";
-
-// Import project images
-import autoRickshawDashboard from "@/assets/auto-rickshaw-dashboard.jpg";
-import drhpBrainDashboard from "@/assets/drhp-brain-dashboard.jpg";
-import tradingDeskSetup from "@/assets/trading-desk-setup.jpg";
-import holographicBrainLab from "@/assets/holographic-brain-lab.jpg";
+import { projectsMeta } from "@/lib/portfolio-data";
+import autoSarthiImg from "@/assets/project-auto-sarthi.jpg";
+import redleafImg from "@/assets/project-redleaf.jpg";
+import traderImg from "@/assets/project-trader-insight.jpg";
+import jarvisImg from "@/assets/project-jarvis.jpg";
+import portfolioImg from "@/assets/project-portfolio.jpg";
+import bloggingImg from "@/assets/project-blogging.jpg";
 
 export const Route = createFileRoute("/projects")({
   component: Projects,
   head: () => ({ meta: [
     { title: "Projects — Sankalp Misal" },
-    { name: "description", content: "Selected projects — full-stack, AI, tools, and systems." },
+    { name: "description", content: "Selected projects — Auto Sarthi, RedLeaf, Trader Insight, Jarvis, Portfolio, Blogging Platform." },
   ]}),
 });
 
-type Project = {
-  title: string;
-  category: "Mega Project" | "AI" | "Systems" | "Tools";
-  description: string;
-  tech: string[];
-  features: string[];
-  github?: string;
-  demo?: string;
-  accent: string;
-  image?: string;
+const imageMap: Record<string, string> = {
+  "auto-sarthi": autoSarthiImg,
+  "redleaf": redleafImg,
+  "trader-insight": traderImg,
+  "jarvis": jarvisImg,
+  "portfolio": portfolioImg,
+  "blogging": bloggingImg,
 };
 
-const projects: Project[] = [
-  {
-    title: "Auto Sarthi",
-    category: "Mega Project",
-    description: "An intelligent automobile companion connecting vehicle owners with services, diagnostics, and roadside assistance in real time.",
-    tech: ["React", "Node.js", "PostgreSQL", "Maps API", "Socket.io"],
-    features: ["Live service tracking", "Vehicle diagnostics", "Booking & payments", "Owner dashboard"],
-    demo: "#",
-    accent: "from-cyan-400 via-blue-500 to-purple-500",
-    image: autoRickshawDashboard,
-  },
-  {
-    title: "DocManager",
-    category: "Mega Project",
-    description: "A secure, multi-tenant document management platform with granular permissions, versioning, and search.",
-    tech: ["React", "Express", "PostgreSQL", "S3", "Elasticsearch"],
-    features: ["Role-based access", "Full-text search", "Version history", "Audit trail"],
-    github: "https://github.com/SM71234/DocManager.git",
-    accent: "from-purple-500 via-fuchsia-500 to-pink-500",
-    image: drhpBrainDashboard,
-  },
-  {
-    title: "Trader Dashboard",
-    category: "Systems",
-    description: "A comprehensive trading workspace and visualization tool analyzing market volume, order logs, and provider performance.",
-    tech: ["Python", "Pandas", "Matplotlib", "Tkinter", "React"],
-    features: ["Real-time data visualization", "Order log analysis", "Multi-provider tracking", "Performance metrics"],
-    github: "https://github.com/SM71234/Trader-Insight.git",
-    demo: "/trader-insight",
-    accent: "from-blue-600 via-teal-500 to-indigo-600",
-    image: tradingDeskSetup,
-  },
-  {
-    title: "Jarvis Voice Assistant",
-    category: "AI",
-    description: "A Python-powered voice assistant that automates system tasks, answers queries, and controls apps by voice.",
-    tech: ["Python", "SpeechRecognition", "OpenAI", "PyAutoGUI"],
-    features: ["Wake-word activation", "System automation", "Web queries", "Custom skills"],
-    github: "https://github.com/SM71234/Jarvis--Voice-Assistant-Python-.git",
-    accent: "from-blue-500 via-indigo-500 to-purple-600",
-    image: holographicBrainLab,
-  },
-  {
-    title: "My Very Own ChatGPT",
-    category: "AI",
-    description: "A polished chat interface over LLM APIs with streaming, prompt library, and persistent conversations.",
-    tech: ["React", "Node.js", "OpenAI", "SSE"],
-    features: ["Streaming replies", "Prompt library", "Conversation memory", "Markdown rendering"],
-    github: "https://github.com/SM71234/My-own-Chat-GPT-.git", demo: "https://my-own-chat-gpt-gamma.vercel.app",
-    accent: "from-emerald-400 via-cyan-500 to-blue-600",
-  },
-  {
-    title: "Cricket Scoreboard System",
-    category: "Systems",
-    description: "A real-time cricket scoreboard and match management system with live commentary and stats.",
-    tech: ["Java", "Swing", "MySQL"],
-    features: ["Live scoring", "Player stats", "Match history", "Reports"],
-    github: "https://github.com/SM71234/Cricket-scoreboard-project.git",
-    accent: "from-orange-400 via-rose-500 to-purple-600",
-  },
-  {
-    title: "Student Information System",
-    category: "Tools",
-    description: "A complete SIS for managing students, courses, attendance, and grades with role-based dashboards.",
-    tech: ["PHP", "MySQL", "Bootstrap"],
-    features: ["Admin/Faculty/Student roles", "Attendance", "Grades", "Reports"],
-    github: "https://github.com/SM71234/SIMS.git",
-    accent: "from-cyan-400 via-teal-500 to-emerald-500",
-  },
-];
+const projects = projectsMeta.map((p) => ({
+  ...p,
+  image: imageMap[p.slug],
+  github: "https://github.com",
+  demo: p.slug === "portfolio" ? "/" : undefined,
+}));
 
-const categories = ["All", "Mega Project", "AI", "Systems", "Tools"] as const;
+const categories = ["All", "Mega Project", "AI", "Full Stack"] as const;
 
 function Projects() {
   const [filter, setFilter] = useState<(typeof categories)[number]>("All");
@@ -122,6 +56,8 @@ function Projects() {
   const project = list[idx];
   const next = () => setIdx((i) => (i + 1) % list.length);
   const prev = () => setIdx((i) => (i - 1 + list.length) % list.length);
+
+  if (!project) return null;
 
   return (
     <PageShell
@@ -160,26 +96,36 @@ function Projects() {
             transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
             className="glass-strong rounded-[2rem] overflow-hidden cursor-grab active:cursor-grabbing"
           >
-            <div className={`relative h-64 md:h-80 bg-gradient-to-br ${project.accent}`}>
-              {project.image ? (
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
-                  className="absolute inset-0 h-full w-full object-cover opacity-50 mix-blend-luminosity transition-all duration-700 hover:scale-[1.03] hover:opacity-75"
-                />
-              ) : (
-                <div className="absolute inset-0 opacity-30 grid-bg" />
-              )}
-              <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/25 to-transparent" />
+            <div className="relative h-64 md:h-96 overflow-hidden">
+              <motion.img
+                src={project.image}
+                alt={project.title}
+                loading="lazy"
+                width={1280}
+                height={800}
+                className="absolute inset-0 h-full w-full object-cover"
+                initial={{ scale: 1.05 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 1.2, ease: "easeOut" }}
+              />
+              <div className={`absolute inset-0 bg-gradient-to-br ${project.accent} mix-blend-overlay opacity-40`} />
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
               <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between gap-4">
                 <div>
-                  <div className="text-xs uppercase tracking-[0.25em] text-white/80">{project.category}</div>
-                  <h2 className="mt-2 font-display text-3xl md:text-5xl font-semibold text-white">
+                  <div className="inline-flex items-center gap-2 rounded-full glass px-3 py-1 text-[10px] uppercase tracking-[0.25em] text-white/90">
+                    <motion.span
+                      animate={{ scale: [1, 1.4, 1] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                      className="h-1.5 w-1.5 rounded-full bg-emerald-400"
+                    />
+                    {project.category}
+                  </div>
+                  <h2 className="mt-3 font-display text-3xl md:text-5xl font-semibold text-white drop-shadow-lg">
                     {project.title}
                   </h2>
                 </div>
-                <div className="hidden md:block text-white/70 text-xs">
-                  {idx + 1} / {list.length}
+                <div className="hidden md:block text-white/70 text-xs font-mono">
+                  {String(idx + 1).padStart(2, "0")} / {String(list.length).padStart(2, "0")}
                 </div>
               </div>
             </div>
@@ -238,10 +184,10 @@ function Projects() {
             ))}
           </div>
           <div className="flex gap-2">
-            <button onClick={prev} className="grid h-10 w-10 place-items-center rounded-full glass hover:bg-white/10">
+            <button onClick={prev} className="grid h-10 w-10 place-items-center rounded-full glass hover:bg-white/10" aria-label="Previous">
               <ArrowLeft className="h-4 w-4" />
             </button>
-            <button onClick={next} className="grid h-10 w-10 place-items-center rounded-full bg-gradient-neon text-background">
+            <button onClick={next} className="grid h-10 w-10 place-items-center rounded-full bg-gradient-neon text-background" aria-label="Next">
               <ArrowRight className="h-4 w-4" />
             </button>
           </div>

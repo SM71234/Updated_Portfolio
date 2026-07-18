@@ -9,18 +9,23 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TraderInsightRouteImport } from './routes/trader-insight'
+import { Route as TerminalRouteImport } from './routes/terminal'
 import { Route as SkillsRouteImport } from './routes/skills'
+import { Route as ReadmeRouteImport } from './routes/readme'
 import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as NowRouteImport } from './routes/now'
+import { Route as JourneyRouteImport } from './routes/journey'
+import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as ExperienceRouteImport } from './routes/experience'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CertificatesRouteImport } from './routes/certificates'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiAssistantRouteImport } from './routes/api/assistant'
 
-const TraderInsightRoute = TraderInsightRouteImport.update({
-  id: '/trader-insight',
-  path: '/trader-insight',
+const TerminalRoute = TerminalRouteImport.update({
+  id: '/terminal',
+  path: '/terminal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SkillsRoute = SkillsRouteImport.update({
@@ -28,9 +33,29 @@ const SkillsRoute = SkillsRouteImport.update({
   path: '/skills',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReadmeRoute = ReadmeRouteImport.update({
+  id: '/readme',
+  path: '/readme',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProjectsRoute = ProjectsRouteImport.update({
   id: '/projects',
   path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NowRoute = NowRouteImport.update({
+  id: '/now',
+  path: '/now',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JourneyRoute = JourneyRouteImport.update({
+  id: '/journey',
+  path: '/journey',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ExperienceRoute = ExperienceRouteImport.update({
@@ -58,6 +83,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAssistantRoute = ApiAssistantRouteImport.update({
+  id: '/api/assistant',
+  path: '/api/assistant',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -65,9 +95,14 @@ export interface FileRoutesByFullPath {
   '/certificates': typeof CertificatesRoute
   '/contact': typeof ContactRoute
   '/experience': typeof ExperienceRoute
+  '/gallery': typeof GalleryRoute
+  '/journey': typeof JourneyRoute
+  '/now': typeof NowRoute
   '/projects': typeof ProjectsRoute
+  '/readme': typeof ReadmeRoute
   '/skills': typeof SkillsRoute
-  '/trader-insight': typeof TraderInsightRoute
+  '/terminal': typeof TerminalRoute
+  '/api/assistant': typeof ApiAssistantRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -75,9 +110,14 @@ export interface FileRoutesByTo {
   '/certificates': typeof CertificatesRoute
   '/contact': typeof ContactRoute
   '/experience': typeof ExperienceRoute
+  '/gallery': typeof GalleryRoute
+  '/journey': typeof JourneyRoute
+  '/now': typeof NowRoute
   '/projects': typeof ProjectsRoute
+  '/readme': typeof ReadmeRoute
   '/skills': typeof SkillsRoute
-  '/trader-insight': typeof TraderInsightRoute
+  '/terminal': typeof TerminalRoute
+  '/api/assistant': typeof ApiAssistantRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -86,9 +126,14 @@ export interface FileRoutesById {
   '/certificates': typeof CertificatesRoute
   '/contact': typeof ContactRoute
   '/experience': typeof ExperienceRoute
+  '/gallery': typeof GalleryRoute
+  '/journey': typeof JourneyRoute
+  '/now': typeof NowRoute
   '/projects': typeof ProjectsRoute
+  '/readme': typeof ReadmeRoute
   '/skills': typeof SkillsRoute
-  '/trader-insight': typeof TraderInsightRoute
+  '/terminal': typeof TerminalRoute
+  '/api/assistant': typeof ApiAssistantRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -98,9 +143,14 @@ export interface FileRouteTypes {
     | '/certificates'
     | '/contact'
     | '/experience'
+    | '/gallery'
+    | '/journey'
+    | '/now'
     | '/projects'
+    | '/readme'
     | '/skills'
-    | '/trader-insight'
+    | '/terminal'
+    | '/api/assistant'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -108,9 +158,14 @@ export interface FileRouteTypes {
     | '/certificates'
     | '/contact'
     | '/experience'
+    | '/gallery'
+    | '/journey'
+    | '/now'
     | '/projects'
+    | '/readme'
     | '/skills'
-    | '/trader-insight'
+    | '/terminal'
+    | '/api/assistant'
   id:
     | '__root__'
     | '/'
@@ -118,9 +173,14 @@ export interface FileRouteTypes {
     | '/certificates'
     | '/contact'
     | '/experience'
+    | '/gallery'
+    | '/journey'
+    | '/now'
     | '/projects'
+    | '/readme'
     | '/skills'
-    | '/trader-insight'
+    | '/terminal'
+    | '/api/assistant'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -129,18 +189,23 @@ export interface RootRouteChildren {
   CertificatesRoute: typeof CertificatesRoute
   ContactRoute: typeof ContactRoute
   ExperienceRoute: typeof ExperienceRoute
+  GalleryRoute: typeof GalleryRoute
+  JourneyRoute: typeof JourneyRoute
+  NowRoute: typeof NowRoute
   ProjectsRoute: typeof ProjectsRoute
+  ReadmeRoute: typeof ReadmeRoute
   SkillsRoute: typeof SkillsRoute
-  TraderInsightRoute: typeof TraderInsightRoute
+  TerminalRoute: typeof TerminalRoute
+  ApiAssistantRoute: typeof ApiAssistantRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/trader-insight': {
-      id: '/trader-insight'
-      path: '/trader-insight'
-      fullPath: '/trader-insight'
-      preLoaderRoute: typeof TraderInsightRouteImport
+    '/terminal': {
+      id: '/terminal'
+      path: '/terminal'
+      fullPath: '/terminal'
+      preLoaderRoute: typeof TerminalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/skills': {
@@ -150,11 +215,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SkillsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/readme': {
+      id: '/readme'
+      path: '/readme'
+      fullPath: '/readme'
+      preLoaderRoute: typeof ReadmeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/projects': {
       id: '/projects'
       path: '/projects'
       fullPath: '/projects'
       preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/now': {
+      id: '/now'
+      path: '/now'
+      fullPath: '/now'
+      preLoaderRoute: typeof NowRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/journey': {
+      id: '/journey'
+      path: '/journey'
+      fullPath: '/journey'
+      preLoaderRoute: typeof JourneyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/experience': {
@@ -192,6 +285,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/assistant': {
+      id: '/api/assistant'
+      path: '/api/assistant'
+      fullPath: '/api/assistant'
+      preLoaderRoute: typeof ApiAssistantRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -201,20 +301,15 @@ const rootRouteChildren: RootRouteChildren = {
   CertificatesRoute: CertificatesRoute,
   ContactRoute: ContactRoute,
   ExperienceRoute: ExperienceRoute,
+  GalleryRoute: GalleryRoute,
+  JourneyRoute: JourneyRoute,
+  NowRoute: NowRoute,
   ProjectsRoute: ProjectsRoute,
+  ReadmeRoute: ReadmeRoute,
   SkillsRoute: SkillsRoute,
-  TraderInsightRoute: TraderInsightRoute,
+  TerminalRoute: TerminalRoute,
+  ApiAssistantRoute: ApiAssistantRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
